@@ -8,6 +8,7 @@
 #include <wx/filename.h>
 #include <wx/graphics.h>
 #include "SoftwareMonitor.h"
+#include "ProgramDialog.h"
 
 
 /**
@@ -19,9 +20,6 @@ Program::Program(SoftwareMonitor *monitor, wxString filePath) : mSoftwareMonitor
 {
     wxFileName fileName(mFilePath);
     mFileName = fileName.GetFullName(); // Get the full file name with extension
-
-    // set the parent for the programAction
-    mAction.SetParent(this);
 }
 /**
  * Draw the iamge of the program
@@ -128,7 +126,11 @@ void Program::Click(double x, double y) { }
  */
 void Program::DoubleClick(double x, double y, wxWindow* window)
 {
-    mAction.EditProgram(window);
+    ProgramDialog dlg(window, this);
+    if(dlg.ShowModal() == wxID_OK)
+    {
+        // box is pulled up through double-clicking
+    }
 }
 
 
@@ -149,7 +151,7 @@ void Program::SetImage(wxString filepath)
     if (!filepath.empty()) {
 //         Create a temporary wxImage object
         wxImage tempImage;
-
+        mImagePath = filepath;
 
 //         Load the image from the file path
         if (tempImage.LoadFile(filepath, wxBITMAP_TYPE_ANY)) {
@@ -159,10 +161,6 @@ void Program::SetImage(wxString filepath)
     }
 
 
-
-// Assuming filepath is the path to the image file
-//    wxString filepathnew = "/Users/Ryan's Server/Downloads/download.png"; // Example filepath
-//
-//    auto image = std::make_shared<wxImage>(filepathnew, wxBITMAP_TYPE_ANY);
-
 }
+
+

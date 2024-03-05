@@ -23,7 +23,10 @@ void SoftwareMonitorView::Initialize(wxFrame* parent)
     Bind(wxEVT_LEFT_DCLICK, &SoftwareMonitorView::OnDoubleClick, this);
 }
 
-// Size event handler
+/**
+ * Trigger repaint when size change s
+ * @param event
+ */
 void SoftwareMonitorView::OnSize(wxSizeEvent& event)
 {
     Refresh();  // Trigger repaint when size changes

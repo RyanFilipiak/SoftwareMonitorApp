@@ -8,7 +8,7 @@
 #ifndef SOFTWAREMONITORPROJECT_SOFTWAREMONITORLIB_PROGRAMDIALOG_H
 #define SOFTWAREMONITORPROJECT_SOFTWAREMONITORLIB_PROGRAMDIALOG_H
 
-class ProgramAction;
+class Program;
 
 
 class ProgramDialog : public wxDialog
@@ -18,7 +18,7 @@ private:
     void OnInitDialog(wxInitDialogEvent& event);
 
     /// Program we are editing
-    ProgramAction *mProgramAction = nullptr;
+    Program *mProgram = nullptr;
 
     /// Change program aspects
     wxTextCtrl* nameField; // The programs name
@@ -31,7 +31,7 @@ private:
 
 
 public:
-    ProgramDialog(wxWindow *parent, ProgramAction * program);
+    ProgramDialog(wxWindow *parent, Program * program);
     void OnChangePath(wxCommandEvent &event);
     void OnChangeImage(wxCommandEvent &event);
     void OnRestartProgram(wxCommandEvent &event);

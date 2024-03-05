@@ -7,8 +7,6 @@ set(SOURCE_FILES pch.h MainFrame.cpp MainFrame.h
         SoftwareMonitor.h
         Program.cpp
         Program.h
-        ProgramAction.cpp
-        ProgramAction.h
         ProgramDialog.cpp
         ProgramDialog.h
 )

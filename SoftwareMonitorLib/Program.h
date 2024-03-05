@@ -8,7 +8,6 @@
 #ifndef SOFTWAREMONITORPROJECT_SOFTWAREMONITORLIB_PROGRAM_H
 #define SOFTWAREMONITORPROJECT_SOFTWAREMONITORLIB_PROGRAM_H
 
-#include "ProgramAction.h"
 #include <wx/graphics.h>
 
 class SoftwareMonitor;
@@ -19,9 +18,6 @@ class SoftwareMonitor;
 class Program
 {
 private:
-    /// the object that represents actions that can be taken
-    ProgramAction mAction;
-
     /// The exe this item is contained in (its parent)
     SoftwareMonitor *mSoftwareMonitor = nullptr;
 
@@ -30,6 +26,9 @@ private:
 
     /// File Name
     wxString mFileName;
+
+    /// Image path
+    wxString mImagePath;
 
     /// Programs location on the screen
     double  mX = 0;     ///< X location for the center of the item
@@ -66,21 +65,24 @@ public:
     void Click(double x, double y);
     void DoubleClick(double x, double y, wxWindow *window);
     void Program::RemoveProgram(Program *);
+    void SetImage(wxString filepath);
+    void DrawImage(std::shared_ptr<wxGraphicsContext> gc, wxDC *dc, int x, int y, int boxWidth, int boxHeight);
 
     /**
      * Get the File name
+     * @return: file name
      */
      wxString Program::GetFileName() { return mFileName; }
 
     /**
     * Get the files path
+     * @return: file path
     */
     wxString Program::GetPath() { return mFilePath; }
 
 
-    void SetImage(wxString filepath);
+    wxString Program::GetImage() { return mImagePath; }
 
-    void DrawImage(std::shared_ptr<wxGraphicsContext> gc, wxDC *dc, int x, int y, int boxWidth, int boxHeight);
 };
 
 #endif //SOFTWAREMONITORPROJECT_SOFTWAREMONITORLIB_PROGRAM_H

@@ -4,15 +4,15 @@
  */
 
 #include "ProgramDialog.h"
-#include "ProgramAction.h"
+#include "Program.h"
 
 /**
  * Constructor
  * @param parent Parent window to put this dialog box inside
  * @param machineSystem MachineSystem we are editing
  */
-ProgramDialog::ProgramDialog(wxWindow* parent, ProgramAction* program)
-    : wxDialog(parent, wxID_ANY, L"Edit Program"), mProgramAction(program)
+ProgramDialog::ProgramDialog(wxWindow* parent, Program* program)
+    : wxDialog(parent, wxID_ANY, L"Edit Program"), mProgram(program)
 {
 
     // Create input fields for editing program properties
@@ -106,8 +106,13 @@ void ProgramDialog::OnOK(wxCommandEvent& event)
     {
         EndModal(wxID_OK);
 
+        // verify path is new
         wxString newImagePath = imageField->GetValue();
-        mProgramAction->SetImage(newImagePath);
+        if (newImagePath != mProgram->GetImage())
+        {
+//            wxString newImagePath = imageField->GetValue();
+            mProgram->SetImage(newImagePath);
+        }
 
 
         // Retrieve edited values and update program properties
@@ -220,5 +225,5 @@ void ProgramDialog::OnRemoveProgram(wxCommandEvent& event)
     Close();
 
     // Implement the code to remove the program here
-    mProgramAction->RemoveProgram();
+    mProgram->RemoveProgram(mProgram);
 }
